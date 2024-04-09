@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Resources;
 using System.Reflection;
+using System.Collections.Generic;
 
 namespace AsterNET.FastAGI.MappingStrategies
 {
@@ -21,7 +22,7 @@ namespace AsterNET.FastAGI.MappingStrategies
 		private Logger logger = Logger.Instance();
 #endif
 		private string resourceName;
-		private Hashtable mapping;
+		private Dictionary<String, AGIScript> mapping;
 
 		public ResourceMappingStrategy()
 		{
@@ -39,11 +40,15 @@ namespace AsterNET.FastAGI.MappingStrategies
 		{
 			AGIScript script = null;
 			if (mapping != null)
-				lock (mapping.SyncRoot)
+			{
+				lock (mapping)
 				{
-					if (mapping.Contains(request.Script))
+					if (mapping.ContainsKey(request.Script))
+					{
 						script = (AGIScript)mapping[request.Script];
+					}
 				}
+			}
 			return script;
 		}
 
@@ -71,7 +76,9 @@ namespace AsterNET.FastAGI.MappingStrategies
 			AGIScript agiScript;
 
 			if (mapping == null)
-				mapping = new Hashtable();
+			{
+				mapping = new Dictionary<string, AGIScript>();
+			}
 			lock (mapping)
 			{
 				mapping.Clear();
@@ -83,8 +90,10 @@ namespace AsterNET.FastAGI.MappingStrategies
 						scriptName = (string)de.Key;
 						className = (string)de.Value;
 						agiScript = CreateAGIScriptInstance(className);
-						if(mapping.Contains(scriptName))
+						if (mapping.ContainsKey(scriptName))
+						{
 							throw new AGIException(String.Format("Duplicate mapping name '{0}' in file {1}", scriptName, resourceName));
+						}
 						mapping.Add(scriptName, agiScript);
 #if LOGGER
 						logger.Info("Added mapping for '" + scriptName + "' to class " + agiScript.GetType().FullName);

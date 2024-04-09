@@ -3,7 +3,7 @@ using System;
 namespace AsterNET.FastAGI
 {
 	/// <summary>
-	/// The BaseAGIScript provides some convinience methods to make it easier to
+	/// The BaseAGIScript provides some convenience methods to make it easier to
 	/// write custom AGIScripts.<br/>
 	/// Just extend it by your own AGIScripts.
 	/// </summary>
