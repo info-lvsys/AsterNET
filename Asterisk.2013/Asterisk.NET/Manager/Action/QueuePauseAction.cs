@@ -1,7 +1,7 @@
 namespace AsterNET.Manager.Action
 {
     /// <summary>
-    ///     The QueuePauseAction makes a queue member temporarily unavailabe (or available again).<br />
+    ///     The QueuePauseAction makes a queue member temporarily unavailabe (or available again).<br/>
     ///     Available since Asterisk 1.2.
     /// </summary>
     public class QueuePauseAction : ManagerAction
@@ -74,20 +74,20 @@ namespace AsterNET.Manager.Action
         }
 
         /// <summary>
-        ///     The name of the interface (tech/name) to pause or unpause.<br />
+        ///     The name of the interface (tech/name) to pause or unpause.<br/>
         ///     This property is mandatory.
         /// </summary>
         public string Interface { get; set; }
 
         /// <summary>
-        ///     The name of the queue in which to pause or unpause this member.<br />
+        ///     The name of the queue in which to pause or unpause this member.<br/>
         ///     If null, the member will be paused or unpaused in all the queues it is a member of.
         /// </summary>
         public string Queue { get; set; }
 
         /// <summary>
-        ///     Pause or unpause the interface.<br />
-        //      Set to 'true' to pause the member or 'false' to unpause.
+        ///     Pause or unpause the interface.<br/>
+        ///      Set to 'true' to pause the member or 'false' to unpause.
         /// </summary>
         public bool Paused { get; set; }
 

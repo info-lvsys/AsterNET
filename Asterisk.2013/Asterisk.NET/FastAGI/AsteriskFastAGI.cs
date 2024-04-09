@@ -254,7 +254,7 @@ namespace AsterNET.FastAGI
                 logger.Info("AGI Server shut down.");
 #endif
 
-                throw ex;
+                throw;
             }
 
 #if LOGGER
@@ -281,7 +281,7 @@ namespace AsterNET.FastAGI
 #if LOGGER
                     logger.Error("IOException while waiting for connections (1).", ex);
 #endif
-                    throw ex;
+                    throw;
                 }
             }
             finally

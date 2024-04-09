@@ -96,9 +96,9 @@ namespace AsterNET.FastAGI
                 catch (Exception ex)
                 {
 #if LOGGER
-                    logger.Error("Resource bundle '" + resourceName + "' is missing.");
+                    logger.Error("Resource bundle '" + resourceName + "' is missing. Reason: " + ex.Message);
 #endif
-                    throw ex;
+                    throw;
                 }
             }
         }
